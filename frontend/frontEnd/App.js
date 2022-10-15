@@ -1,10 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { StyleSheet, 
+  SafeAreaView,
+  ScrollView,
+  Text, 
+  View,
+  Button } from 'react-native';
 
 function HomeScreen() {
+  return (
+    <View style={styles.container}>
+      <Text>Home Screen</Text>
+        <Button
+          title='Go to details screen'
+        />
+    </View>
+  );
+}
+
+function DetailsScreen() {
   return (
     <View style={styles.container}>
       <Text>Home Screen</Text>
@@ -24,6 +40,8 @@ function App() {
     </NavigationContainer>
   );
 }
+
+
 
 const styles = StyleSheet.create({
   container: {
