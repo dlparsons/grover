@@ -15,11 +15,11 @@
         }
       },
       "renditions": [
-        "adobe-xd/compare-button.png"
+        "compare-button.png"
       ],
-      "name": "grover-compare-button",
+      "name": "Compare Prices Button",
       "tags": [],
-      "last_updated": "2022-10-26T03:27:06.076Z",
+      "last_updated": "2022-10-26T03:54:12.378Z",
       "last_updated_by": "",
       "description": "The Compare button for the Grover app UI."
     }
