@@ -1,0 +1,286 @@
+{
+  "dsp_spec_version": "0.0.1",
+  "last_updated_by": "",
+  "last_updated": "2022-10-26T02:22:54.621Z",
+  "entities": [
+    {
+      "class": "collection",
+      "type": "font",
+      "id": "1e6805c5-4c15-44fa-8ab9-452b636f7672",
+      "name": "grover-body-small-light-font",
+      "last_updated": "2022-10-26T02:49:09.519Z",
+      "last_updated_by": "",
+      "description": "Body Small (light) character style for the Grover app.",
+      "tags": [],
+      "related_entity_ids": [],
+      "tokens": [
+        {
+          "id": "grover-body-small-light-family",
+          "type": "custom",
+          "value": "Acumin Pro SemiCondensed",
+          "key": "family"
+        },
+        {
+          "id": "grover-body-small-light-weight",
+          "type": "custom",
+          "value": " Medium",
+          "key": "weight"
+        },
+        {
+          "id": "grover-body-small-light-size",
+          "type": "custom",
+          "value": "14pt",
+          "key": "size"
+        }
+      ]
+    },
+    {
+      "class": "collection",
+      "type": "font",
+      "id": "3ac38998-1759-4722-bd97-fe80f5aa2607",
+      "name": "grover-button-font",
+      "last_updated": "2022-10-26T02:48:55.007Z",
+      "last_updated_by": "",
+      "description": "Button character style for the Grover app.",
+      "tags": [],
+      "related_entity_ids": [],
+      "tokens": [
+        {
+          "id": "grover-button-font-family",
+          "type": "custom",
+          "value": "Acumin Pro SemiCondensed",
+          "key": "family"
+        },
+        {
+          "id": "grover-button-font-weight",
+          "type": "custom",
+          "value": "Bold",
+          "key": "weight"
+        },
+        {
+          "id": "grover-button-font-size",
+          "type": "custom",
+          "value": "14pt",
+          "key": "size"
+        }
+      ]
+    },
+    {
+      "class": "collection",
+      "type": "font",
+      "id": "3fd6c276-6660-4044-8062-dac08350da49",
+      "name": "grover-heading-1-font",
+      "last_updated": "2022-10-26T02:50:59.059Z",
+      "last_updated_by": "",
+      "description": "Heading 1 character style for the Grover app.",
+      "tags": [],
+      "related_entity_ids": [],
+      "tokens": [
+        {
+          "id": "grover-heading-1-font-family",
+          "type": "custom",
+          "value": "Acumin Pro SemiCondensed",
+          "key": "family"
+        },
+        {
+          "id": "grover-heading-1-font-weight",
+          "type": "custom",
+          "value": "Regular",
+          "key": "weight"
+        },
+        {
+          "id": "grover-heading-1-font-size",
+          "type": "custom",
+          "value": "30pt",
+          "key": "size"
+        }
+      ]
+    },
+    {
+      "class": "collection",
+      "type": "font",
+      "id": "3be305fc-c0f4-4bc5-9dc5-9917b9cb4c96",
+      "name": "grover-link-font",
+      "last_updated": "2022-10-26T02:52:44.544Z",
+      "last_updated_by": "",
+      "description": "Link character style for the Grover app.",
+      "tags": [],
+      "related_entity_ids": [],
+      "tokens": [
+        {
+          "id": "-family",
+          "type": "custom",
+          "value": "Acumin Pro SemiCondensed",
+          "key": "family"
+        },
+        {
+          "id": "-weight",
+          "type": "custom",
+          "value": "Bold",
+          "key": "weight"
+        },
+        {
+          "id": "-size",
+          "type": "custom",
+          "value": "14pt",
+          "key": "size"
+        }
+      ]
+    },
+    {
+      "class": "collection",
+      "type": "font",
+      "id": "08665ed5-ab56-4168-9416-86247c2a688e",
+      "name": "grover-heading-3-font",
+      "last_updated": "2022-10-26T02:54:13.136Z",
+      "last_updated_by": "",
+      "description": "Heading 3 character style for the Grover app.",
+      "tags": [],
+      "related_entity_ids": [],
+      "tokens": [
+        {
+          "id": "-family",
+          "type": "custom",
+          "value": "Acumin Pro SemiCondensed",
+          "key": "family"
+        },
+        {
+          "id": "-weight",
+          "type": "custom",
+          "value": "Regular",
+          "key": "weight"
+        },
+        {
+          "id": "-size",
+          "type": "custom",
+          "value": "20pt",
+          "key": "size"
+        }
+      ]
+    },
+    {
+      "class": "collection",
+      "type": "font",
+      "id": "0ed4e1ca-a304-4d9d-b51c-689dc4c0e6dc",
+      "name": "grover-body-dark-font",
+      "last_updated": "2022-10-26T02:57:07.227Z",
+      "last_updated_by": "",
+      "description": "Body (dark) character style for Grover app.",
+      "tags": [],
+      "related_entity_ids": [],
+      "tokens": [
+        {
+          "id": "-family",
+          "type": "custom",
+          "value": "Acumin Pro SemiCondensed",
+          "key": "family"
+        },
+        {
+          "id": "-weight",
+          "type": "custom",
+          "value": "Medium",
+          "key": "weight"
+        },
+        {
+          "id": "-size",
+          "type": "custom",
+          "value": "16pt",
+          "key": "size"
+        }
+      ]
+    },
+    {
+      "class": "collection",
+      "type": "font",
+      "id": "b6417368-3019-4c70-9494-5e41d053a812",
+      "name": "grover-body-green-font",
+      "last_updated": "2022-10-26T02:58:31.502Z",
+      "last_updated_by": "",
+      "description": "Body (green) character style for Grover app.",
+      "tags": [],
+      "related_entity_ids": [],
+      "tokens": [
+        {
+          "id": "grover-body-green-font-weight",
+          "type": "custom",
+          "value": "Medium",
+          "key": "weight"
+        },
+        {
+          "id": "grover-body-green-font-family",
+          "type": "custom",
+          "value": "Acumin Pro SemiCondensed",
+          "key": "family"
+        },
+        {
+          "id": "grover-body-green-font-size",
+          "type": "custom",
+          "value": "16pt",
+          "key": "size"
+        }
+      ]
+    },
+    {
+      "class": "collection",
+      "type": "font",
+      "id": "82627879-063b-4e5d-a623-e1f35d7f6ed0",
+      "name": "grover-heading-2-font",
+      "last_updated": "2022-10-26T03:00:10.136Z",
+      "last_updated_by": "",
+      "description": "Heading 2 character style for the Grover app.",
+      "tags": [],
+      "related_entity_ids": [],
+      "tokens": [
+        {
+          "id": "-family",
+          "type": "custom",
+          "value": "Acumin Pro SemiCondensed",
+          "key": "family"
+        },
+        {
+          "id": "-weight",
+          "type": "custom",
+          "value": "Regular",
+          "key": "weight"
+        },
+        {
+          "id": "-size",
+          "type": "custom",
+          "value": "24pt",
+          "key": "size"
+        }
+      ]
+    },
+    {
+      "class": "collection",
+      "type": "font",
+      "id": "fc82a587-88ff-49c0-86ab-f9def69303e1",
+      "name": "grover-body-light-font",
+      "last_updated": "2022-10-26T03:02:43.093Z",
+      "last_updated_by": "",
+      "description": "Body (light) character style for the Grover app.",
+      "tags": [],
+      "related_entity_ids": [],
+      "tokens": [
+        {
+          "id": "-family",
+          "type": "custom",
+          "value": "Acumin Pro SemiCondensed",
+          "key": "family"
+        },
+        {
+          "id": "-weight",
+          "type": "custom",
+          "value": "Medium",
+          "key": "weight"
+        },
+        {
+          "id": "-size",
+          "type": "custom",
+          "value": "16pt",
+          "key": "size"
+        }
+      ]
+    }
+  ]
+}

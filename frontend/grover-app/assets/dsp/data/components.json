@@ -1,0 +1,27 @@
+{
+  "dsp_spec_version": "0.0.1",
+  "last_updated_by": "",
+  "last_updated": "2022-10-26T02:22:54.621Z",
+  "entities": [
+    {
+      "id": "6cd361cc-3b4f-471c-ac53-3724cc031d98",
+      "class": "component",
+      "type": "page",
+      "related_entity_ids": [],
+      "snippets": {
+        "trigger": "compare",
+        "languages": {
+          "javascriptreact": "<Button\n  onPress={onPressComparePrices}\n  title=\"Compare Prices\"\n  color=\"#25BEE8\"\n  accessibilityLabel=\"Compare grocery prices\"\n/>"
+        }
+      },
+      "renditions": [
+        "adobe-xd/compare-button.png"
+      ],
+      "name": "grover-compare-button",
+      "tags": [],
+      "last_updated": "2022-10-26T03:27:06.076Z",
+      "last_updated_by": "",
+      "description": "The Compare button for the Grover app UI."
+    }
+  ]
+}
