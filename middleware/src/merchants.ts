@@ -14,8 +14,9 @@ export async function merchantsResolver({
   args: Partial<QueryMerchantsArgs>;
   product?: Product;
 }): Promise<Merchant[]> {
+  console.log('Starting merchantsResolver');
   const filterBy = args.filterBy;
-  if (!!filterBy.id) {
+  if (!!filterBy?.id) {
     const location = await LocationModel.findByPk(filterBy.id, {
       include: [
         {
@@ -38,7 +39,7 @@ export async function merchantsResolver({
         },
       },
     ];
-  } else if (!!filterBy.name) {
+  } else if (!!filterBy?.name) {
     // Search for merchants by name
     const merchantSearch = {
       where: {
@@ -66,7 +67,7 @@ export async function merchantsResolver({
       merchantSearch.where.name[Op.endsWith] = filterBy.name.endsWith;
     }
     if (!!filterBy.name.matches) {
-      merchantSearch.where.name[Op.match] = filterBy.name.matches;
+      merchantSearch.where.name[Op.eq] = filterBy.name.matches;
     }
     const merchants = await MerchantModel.findAll(merchantSearch);
     return merchants
@@ -83,7 +84,7 @@ export async function merchantsResolver({
         }))
       )
       .flat();
-  } else if (!!filterBy.location) {
+  } else if (!!filterBy?.location) {
     const merchantSearch = {
       where: {},
       include: [
@@ -112,7 +113,7 @@ export async function merchantsResolver({
           filterBy.location.address.endsWith;
       }
       if (filterBy.location.address.matches !== undefined) {
-        merchantSearch.where.streetName[Op.match] =
+        merchantSearch.where.streetName[Op.eq] =
           filterBy.location.address.matches;
       }
     }
@@ -127,7 +128,7 @@ export async function merchantsResolver({
           filterBy.location.city.endsWith;
       }
       if (filterBy.location.city.matches !== undefined) {
-        merchantSearch.where.city[Op.match] = filterBy.location.city.matches;
+        merchantSearch.where.city[Op.eq] = filterBy.location.city.matches;
       }
     }
     if (!!filterBy.location.state) {
@@ -141,7 +142,7 @@ export async function merchantsResolver({
           filterBy.location.state.endsWith;
       }
       if (filterBy.location.state.matches !== undefined) {
-        merchantSearch.where.state[Op.match] = filterBy.location.state.matches;
+        merchantSearch.where.state[Op.eq] = filterBy.location.state.matches;
       }
     }
     if (!!filterBy.location.zip) {
@@ -154,7 +155,7 @@ export async function merchantsResolver({
         merchantSearch.where.zip[Op.endsWith] = filterBy.location.zip.endsWith;
       }
       if (filterBy.location.zip.matches !== undefined) {
-        merchantSearch.where.zip[Op.match] = filterBy.location.zip.matches;
+        merchantSearch.where.zip[Op.eq] = filterBy.location.zip.matches;
       }
     }
     const merchants = await MerchantModel.findAll(merchantSearch);
@@ -260,7 +261,7 @@ export async function merchantResolver({
 }: {
   product: Product;
 }): Promise<Merchant> {
-  console.log("Starting merchantsOfProductResolver");
+  console.log("Starting merchantResolver");
   const variant = await VariantModel.findByPk(parseInt(product.id), {
     include: [
       {
