@@ -21,11 +21,13 @@ export async function productsResolver({
 }) {
   const filterBy = args.filterBy;
   const variantSearch = {
-    include: {
-      model: ProductModel,
-      attributes: ["name"],
-      as: "product",
-    },
+    include: [
+      {
+        model: ProductModel,
+        attributes: ["name"],
+        as: "product",
+      },
+    ],
   } as any;
   if (!!merchant) {
     variantSearch.where = variantSearch.where ?? {};
@@ -117,7 +119,13 @@ export async function updateProductPriceMutation(
       productId: parseInt(productId),
       locationId: parseInt(merchantId),
     },
-    include: [ProductModel],
+    include: [
+      {
+        model: ProductModel,
+        attributes: ["name"],
+        as: "product",
+      },
+    ],
   });
   if (!variant) return null;
 
