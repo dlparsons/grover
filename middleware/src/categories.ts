@@ -19,7 +19,7 @@ export async function categoriesResolver({
       categorySearch.where.name[Op.endsWith] = filterBy.name.endsWith;
     }
     if (filterBy.name.matches !== undefined) {
-      categorySearch.where.name[Op.match] = filterBy.name.matches;
+      categorySearch.where.name[Op.eq] = filterBy.name.matches;
     }
   }
   if (!!filterBy?.id) {
@@ -38,7 +38,7 @@ export async function categoriesResolver({
         filterBy.description.endsWith;
     }
     if (filterBy.description.matches !== undefined) {
-      categorySearch.where.description[Op.match] = filterBy.description.matches;
+      categorySearch.where.description[Op.eq] = filterBy.description.matches;
     }
   }
   const categories = await CategoryModel.findAll(categorySearch);

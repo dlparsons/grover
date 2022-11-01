@@ -62,7 +62,7 @@ export async function productsResolver({
           productSearch.where.name[Op.endsWith] = filterBy.name.endsWith;
         }
         if (!!filterBy.name.matches) {
-          productSearch.where.name[Op.match] = filterBy.name.matches;
+          productSearch.where.name[Op.eq] = filterBy.name.matches;
         }
       }
       if (!!filterBy.categoryId) {
@@ -82,7 +82,7 @@ export async function productsResolver({
           categorySearch.where.name[Op.endsWith] = filterBy.category.endsWith;
         }
         if (!!filterBy.category.matches) {
-          categorySearch.where.name[Op.match] = filterBy.category.matches;
+          categorySearch.where.name[Op.eq] = filterBy.category.matches;
         }
         const category = await CategoryModel.findOne(categorySearch);
         if (!!category) {
