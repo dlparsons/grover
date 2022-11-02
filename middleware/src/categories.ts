@@ -1,12 +1,12 @@
 import { Op } from "sequelize";
 import { CategoryModel } from "./db";
-import { QueryCategoriesArgs } from "./generated/graphql";
+import { Category, Product, QueryCategoriesArgs } from "./generated/graphql";
 
 export async function categoriesResolver({
   args,
 }: {
   args: Partial<QueryCategoriesArgs>;
-}) {
+}): Promise<Category[]> {
   const filterBy = args.filterBy;
   const categorySearch = {} as any;
   if (!!filterBy?.name) {
@@ -43,9 +43,29 @@ export async function categoriesResolver({
   }
   const categories = await CategoryModel.findAll(categorySearch);
   console.log("About to return Product");
-  return categories.map((category) => ({
+  return categories.map(
+    (category): Category => ({
+      id: category.id.toString(),
+      name: category.name,
+      description: category.description,
+    })
+  );
+}
+
+export async function categoryResolver({
+  product,
+}: {
+  product: Product;
+}): Promise<Category> {
+  const category = await CategoryModel.findByPk(parseInt(product.categoryId));
+
+  if (!category) {
+    return null;
+  }
+
+  return {
     id: category.id.toString(),
     name: category.name,
     description: category.description,
-  }));
+  };
 }

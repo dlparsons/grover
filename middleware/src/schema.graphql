@@ -4,7 +4,8 @@ A date/time object
 scalar Date
 
 """
-A Product will have a price if it is associated with a Merchant.
+Product is a unique instance of a product that appears at a single store. Internally, it has a hidden
+association between it and other products of the same type.
 """
 type Product {
   "A unique identifier for the product."
@@ -12,12 +13,18 @@ type Product {
   "The name of the product."
   name: String!
   "The filename of a product picture."
-  picture: String
+  picture: String!
   "The price of the product at a specific merchant."
-  price: Float
+  price: Float!
   "The weight of the product."
-  weight: Float
-  "The merchant who sells the product matching the given price and weight."
+  weight: Float!
+  "The identifier of the category of this product."
+  categoryId: String!
+  "A reference to the category of this product."
+  category: Category
+  "The identifier of the merchant selling this product."
+  merchantId: String!
+  "The merchant who sells the product at the given price and weight."
   merchant: Merchant
   "List of merchants who sell this product."
   merchants(filterBy: MerchantInput): [Merchant]
@@ -151,8 +158,6 @@ Provide these fields to update a product's price.
 input UpdateProductPriceInput {
   "The productId corresponds to a unique product."
   productId: ID!
-  "The merchantId corresponds to a unique merchant."
-  merchantId: ID!
   "The price is the current shelf price of the product."
   price: Float!
 }

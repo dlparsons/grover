@@ -8,7 +8,7 @@ import { loadSequelize } from "./db";
 import { GraphQLScalarType, Kind } from "graphql";
 import { locationResolver } from "./locations";
 import { Sequelize } from "sequelize";
-import { categoriesResolver } from "./categories";
+import { categoriesResolver, categoryResolver } from "./categories";
 
 const dateScalar = new GraphQLScalarType<Date, number>({
   name: "Date",
@@ -48,6 +48,7 @@ const resolvers: Resolvers = {
     location: async (merchant) => await locationResolver({ merchant }),
   },
   Product: {
+    category: async (product) => await categoryResolver({ product }),
     merchant: async (product) => await merchantResolver({ product }),
     merchants: async (product, args) =>
       await merchantsResolver({ product, args }),

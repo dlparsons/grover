@@ -1,6 +1,6 @@
 import { GraphQLError } from "graphql";
 import { Op } from "sequelize";
-import { CategoryModel, ProductModel, VariantModel } from "./db";
+import { CategoryModel, LocationModel, ProductModel, VariantModel } from "./db";
 import {
   Category,
   Merchant,
@@ -24,7 +24,7 @@ export async function productsResolver({
     include: [
       {
         model: ProductModel,
-        attributes: ["name"],
+        attributes: ["name", "categoryId"],
         as: "product",
       },
     ],
@@ -100,25 +100,25 @@ export async function productsResolver({
     }
   }
   const variants = await VariantModel.findAll(variantSearch);
-  console.log("About to return Product");
-  return variants.map((variant) => ({
-    id: variant.id.toString(),
-    name: variant.product.name,
-    picture: variant.product.picture,
-    price: variant.price,
-    weight: variant.weight,
-  }));
+
+  return variants.map(
+    (variant): Product => ({
+      id: variant.id.toString(),
+      name: variant.product.name,
+      picture: variant.product.picture,
+      price: variant.price,
+      weight: variant.weight,
+      categoryId: variant.product.categoryId?.toString() ?? "categoryId",
+      merchantId: variant.locationId?.toString() ?? "merchantId",
+    })
+  );
 }
 
 export async function updateProductPriceMutation(
   args: RequireFields<MutationUpdateProductPriceArgs, "input">
-): Promise<Product | null> {
-  const { productId, merchantId, price } = args.input;
-  const variant = await VariantModel.findOne({
-    where: {
-      productId: parseInt(productId),
-      locationId: parseInt(merchantId),
-    },
+): Promise<Product> {
+  const { productId, price } = args.input;
+  const variant = await VariantModel.findByPk(parseInt(productId), {
     include: [
       {
         model: ProductModel,
@@ -139,6 +139,10 @@ export async function updateProductPriceMutation(
   return {
     id: variant.id.toString(),
     name: variant.product.name,
+    picture: variant.product.picture,
     price: variant.price,
+    weight: variant.weight,
+    categoryId: variant.product.categoryId.toString(),
+    merchantId: variant.locationId.toString(),
   };
 }
