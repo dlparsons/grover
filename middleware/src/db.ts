@@ -205,8 +205,101 @@ export class VariantModel extends Model<
   declare countHistories: HasManyCountAssociationsMixin;
   declare createHistory: HasManyCreateAssociationMixin<
     VariantHistoryModel,
-    "productId"
+    "variantId"
   >;
+}
+
+export class UserModel extends Model<
+  InferAttributes<UserModel>,
+  InferCreationAttributes<UserModel>
+> {
+  declare id: CreationOptional<number>;
+  declare email: string;
+  declare password: string;
+  declare firstName: string;
+  declare lastName: string;
+  declare mobileNumber: string;
+
+  // One user to many shopping lists
+  declare productLists?: NonAttribute<ProductListModel[]>;
+  declare getProductLists: HasManyGetAssociationsMixin<ProductListModel>;
+  declare addProductList: HasManyAddAssociationMixin<ProductListModel, number>;
+  declare addProductLists: HasManyAddAssociationsMixin<
+    ProductListModel,
+    number
+  >;
+  declare setProductLists: HasManySetAssociationsMixin<
+    ProductListModel,
+    number
+  >;
+  declare removeProductList: HasManyRemoveAssociationMixin<
+    ProductListModel,
+    number
+  >;
+  declare removeProductLists: HasManyRemoveAssociationsMixin<
+    ProductListModel,
+    number
+  >;
+  declare hasProductList: HasManyHasAssociationMixin<ProductListModel, number>;
+  declare hasProductLists: HasManyHasAssociationsMixin<
+    ProductListModel,
+    number
+  >;
+  declare countProductLists: HasManyCountAssociationsMixin;
+  declare createProductList: HasManyCreateAssociationMixin<
+    ProductListModel,
+    "ownerId"
+  >;
+}
+
+export class ProductListModel extends Model<
+  InferAttributes<ProductListModel>,
+  InferCreationAttributes<ProductListModel>
+> {
+  declare id: CreationOptional<number>;
+  declare name: string;
+
+  // Many shopping lists to one owner
+  declare ownerId: ForeignKey<UserModel["id"]>;
+  declare owner?: NonAttribute<UserModel>;
+
+  // One shopping list to many shopping list items
+  declare items?: NonAttribute<ProductListItemModel[]>;
+  declare getItems: HasManyGetAssociationsMixin<ProductListItemModel>;
+  declare addItem: HasManyAddAssociationMixin<ProductListItemModel, number>;
+  declare addItems: HasManyAddAssociationsMixin<ProductListItemModel, number>;
+  declare setItems: HasManySetAssociationsMixin<ProductListItemModel, number>;
+  declare removeItem: HasManyRemoveAssociationMixin<
+    ProductListItemModel,
+    number
+  >;
+  declare removeItems: HasManyRemoveAssociationsMixin<
+    ProductListItemModel,
+    number
+  >;
+  declare hasItem: HasManyHasAssociationMixin<ProductListItemModel, number>;
+  declare hasItems: HasManyHasAssociationsMixin<ProductListItemModel, number>;
+  declare countItems: HasManyCountAssociationsMixin;
+  declare createItem: HasManyCreateAssociationMixin<
+    ProductListItemModel,
+    "productListId"
+  >;
+}
+
+export class ProductListItemModel extends Model<
+  InferAttributes<ProductListItemModel>,
+  InferCreationAttributes<ProductListItemModel>
+> {
+  declare id: CreationOptional<number>;
+  declare quantity: number;
+
+  // One product list item to one product
+  declare productId: ForeignKey<ProductModel["id"]>;
+  declare product?: NonAttribute<ProductModel>;
+
+  // Many product lists items to one product list
+  declare productListId: ForeignKey<ProductListModel["id"]>;
+  declare productList?: NonAttribute<ProductListModel>;
 }
 
 export class VariantHistoryModel extends Model<
@@ -397,7 +490,7 @@ export async function loadSequelize() {
       },
       timestamp: {
         type: DataTypes.DATE,
-        field: 'dt_datetime"',
+        field: "dt_datetime",
       },
       units: {
         type: DataTypes.INTEGER,
@@ -420,6 +513,82 @@ export async function loadSequelize() {
       sequelize,
       modelName: "VariantHistoryModel",
       tableName: "PRODUCTITEM_HIST",
+      timestamps: false,
+    }
+  );
+
+  UserModel.init(
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        field: "user_id",
+      },
+      email: {
+        type: DataTypes.STRING,
+        field: "email_id",
+      },
+      password: {
+        type: DataTypes.STRING,
+        field: "password",
+      },
+      firstName: {
+        type: DataTypes.STRING,
+        field: "first_name",
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        field: "last_name",
+      },
+      mobileNumber: {
+        type: DataTypes.STRING,
+        field: "mobile_no",
+      },
+    },
+    {
+      sequelize,
+      modelName: "UserModel",
+      tableName: "USER",
+      timestamps: false,
+    }
+  );
+
+  ProductListModel.init(
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        field: "shoppinglist_id",
+      },
+      name: {
+        type: DataTypes.STRING,
+        field: "Name",
+      },
+    },
+    {
+      sequelize,
+      modelName: "ProductListModel",
+      tableName: "SHOPPINGLIST",
+      timestamps: false,
+    }
+  );
+
+  ProductListItemModel.init(
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        field: "shoppinglistitem_id",
+      },
+      quantity: {
+        type: DataTypes.INTEGER,
+        field: "QUANTITY",
+      },
+    },
+    {
+      sequelize,
+      modelName: "ProductListItemModel",
+      tableName: "SHOPPINGLISTITEM",
       timestamps: false,
     }
   );
@@ -502,6 +671,47 @@ export async function loadSequelize() {
       field: "Productitem_id",
     },
     as: "variant",
+  });
+
+  // Each user has many product lists
+  UserModel.hasMany(ProductListModel, {
+    foreignKey: {
+      name: "ownerId",
+      field: "user_id",
+    },
+    as: "productLists",
+  });
+  ProductListModel.belongsTo(UserModel, {
+    foreignKey: {
+      name: "ownerId",
+      field: "user_id",
+    },
+    as: "owner",
+  });
+
+  // Each product list has many product list items
+  ProductListModel.hasMany(ProductListItemModel, {
+    foreignKey: {
+      name: "shoppingListId",
+      field: "shoppinglist_id",
+    },
+    as: "items",
+  });
+  ProductListItemModel.belongsTo(ProductListModel, {
+    foreignKey: {
+      name: "shoppingListId",
+      field: "shoppinglist_id",
+    },
+    as: "productList",
+  });
+
+  // Each product list item has one product
+  ProductListItemModel.belongsTo(ProductModel, {
+    foreignKey: {
+      name: "productId",
+      field: "Product_id",
+    },
+    as: "product",
   });
 
   // ProductModel.hasOne(CategoryModel, { sourceKey: "id" });
