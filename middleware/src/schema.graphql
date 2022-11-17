@@ -181,14 +181,14 @@ input AddProductToList {
   "The productId corresponds to a unique list."
   listId: ID!
   "The product to be added to the list."
-  productID: ID!
+  productId: ID!
 }
 
 input RemoveProductFromList {
   "The productId corresponds to a unique list."
   listId: ID!
   "The product to be added to the list."
-  productID: ID!
+  productId: ID!
 }
 
 input ListInfo {
@@ -198,7 +198,7 @@ input ListInfo {
 
 input ListRenameInfo {
   "The listId corresponds to a unique list."
-  listID: ID!
+  listId: ID!
   "The name corresponds to what we will rename the list."
   name: String!
 }
