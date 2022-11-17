@@ -15,15 +15,15 @@ type Product {
   "The filename of a product picture."
   picture: String!
   "The price of the product at a specific merchant."
-  price: Float!
+  price: Float
   "The weight of the product."
-  weight: Float!
+  weight: Float
   "The identifier of the category of this product."
-  categoryId: String!
+  categoryId: String
   "A reference to the category of this product."
   category: Category
   "The identifier of the merchant selling this product."
-  merchantId: String!
+  merchantId: String
   "The merchant who sells the product at the given price and weight."
   merchant: Merchant
   "List of merchants who sell this product."
