@@ -214,11 +214,11 @@ type Mutation {
   addToList(input: AddProductToList!): List
   "This will remove a product from a list."
   removeFromList(input: RemoveProductFromList!): List
-  
-  """
-  These mutations may not be used, depending on what we plan to demo"
-  This will delete a list."
+
+  "This will delete a list."
   deleteList(input: ListInfo!): Boolean
+    @deprecated(reason: "Not implemented yet")
   "This will rename a list."
   renameList(input: ListRenameInfo!): List
+    @deprecated(reason: "Not implemented yet")
 }
