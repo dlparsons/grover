@@ -153,6 +153,18 @@ input MerchantInput {
 }
 
 """
+Search for product lists by any of these properties.
+"""
+input ListInput {
+  "Match a list by its unique id."
+  id: ID
+  "Match a list by the user id."
+  userId: ID
+  "Match a list by its name."
+  name: StringInput
+}
+
+"""
 This is the main list of all queries.
 """
 type Query {
@@ -162,6 +174,8 @@ type Query {
   categories(filterBy: CategoryInput): [Category]
   "Search for merchants. Use `filterBy` to narrow the results."
   merchants(filterBy: MerchantInput): [Merchant]
+  "Search for product lists. Use `filterBy` to narrow the results."
+  list(filterBy: ListInput): List
 }
 
 """

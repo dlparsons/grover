@@ -9,7 +9,7 @@ import { GraphQLScalarType, Kind } from "graphql";
 import { locationResolver } from "./locations";
 import { Sequelize } from "sequelize";
 import { categoriesResolver, categoryResolver } from "./categories";
-import { addToListMutation } from "./list";
+import { listResolver, addToListMutation } from "./list";
 
 const dateScalar = new GraphQLScalarType<Date, number>({
   name: "Date",
@@ -38,6 +38,7 @@ const resolvers: Resolvers = {
     categories: async (_, args) => await categoriesResolver({ args }),
     products: async (_, args) => await productsResolver({ args }),
     merchants: async (_, args) => await merchantsResolver({ args }),
+    list: async(_, args) => await listResolver({ args })
   },
   Category: {
     products: async (category, args) =>

@@ -3,6 +3,7 @@ import { ProductListModel } from "./db";
 import {
   List,
   MutationAddToListArgs,
+  QueryListArgs,
   RequireFields,
 } from "./generated/graphql";
 
@@ -11,14 +12,45 @@ import {
  * @param param0 An object containing a reference to a `list`
  * @returns
  */
-export async function listResolver({ list }: { list: List }): Promise<List> {
-  const product = await ProductListModel.findByPk(parseInt(list.id));
-  if (!product) return null;
+export async function listResolver({ args }: { args: Partial<QueryListArgs> }): Promise<List> {
+  const id = args?.filterBy?.id;
+  if (id !== undefined) {
+    const list = await ProductListModel.findByPk(parseInt(id));
+    if (!list) return null;
 
-  return {
-    id: product.id.toString(),
-    name: product.name,
-  };
+    return {
+      id: list.id.toString(),
+      name: list.name,
+    };
+  }
+  const userId = args?.filterBy?.userId;
+  if (userId !== undefined) {
+    const list = await ProductListModel.findOne({
+      where: {
+        ownerId: parseInt( userId )
+      }
+    });
+    if (!list) return null;
+
+    return {
+      id: list.id.toString(),
+      name: list.name,
+    }
+  }
+  const name = args?.filterBy?.name;
+  if (name !== undefined) {
+    const list = await ProductListModel.findOne({
+      where: {
+        name: name
+      }
+    });
+    if (!list) return null;
+
+    return {
+      id: list.id.toString(),
+      name: list.name,
+    }
+  }
 }
 
 /**
