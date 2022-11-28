@@ -131,7 +131,7 @@ export async function productsResolver({
     if (productId !== undefined) where.productId = productId;
     if (name !== undefined) where["$product.name$"] = name;
     if (categoryId !== undefined)
-      where["$product.categoryId$"] = {
+      where["$product.Category_id$"] = {
         [Op.in]: categoryId,
       };
     const variants = await VariantModel.findAll({
